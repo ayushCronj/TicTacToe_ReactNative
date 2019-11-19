@@ -1,0 +1,296 @@
+import React from "react";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { Button } from "native-base";
+import { Entypo } from "@expo/vector-icons";
+
+let itemArray = new Array(9).fill("empty");
+
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isCross: false,
+      winMessage: "",
+      alertDisplay: false
+    };
+  }
+
+  drawItem = number => {
+    if (itemArray[number] === "empty") {
+      itemArray[number] = this.state.isCross;
+      this.setState({
+        isCross: !this.state.isCross
+      });
+    }
+    this.winGame();
+  };
+
+  chooseItemIcon = number => {
+    if (itemArray[number] !== "empty") {
+      return itemArray[number] ? "cross" : "circle";
+    }
+    return "pencil";
+  };
+
+  chooseItemColor = number => {
+    if (itemArray[number] !== "empty") {
+      return itemArray[number] ? "green" : "red";
+    }
+    return "black";
+  };
+
+  resetGame = () => {
+    itemArray.fill("empty");
+    this.setState({
+      winMessage: "",
+      alertDisplay: false
+    });
+    this.forceUpdate();
+  };
+
+  winGame = () => {
+    if (
+      itemArray[0] !== "empty" &&
+      (itemArray[0] == itemArray[1] && itemArray[1] === itemArray[2])
+    ) {
+      this.setState({
+        winMessage: (itemArray[0] ? "Cross" : "Circle").concat(" wins"),
+        alertDisplay: true
+      });
+    }
+    if (
+      itemArray[3] !== "empty" &&
+      (itemArray[3] == itemArray[4] && itemArray[4] === itemArray[5])
+    ) {
+      this.setState({
+        winMessage: (itemArray[3] ? "Cross" : "Circle").concat(" wins"),
+        alertDisplay: true
+      });
+    }
+    if (
+      itemArray[6] !== "empty" &&
+      (itemArray[6] == itemArray[7] && itemArray[7] === itemArray[8])
+    ) {
+      this.setState({
+        winMessage: (itemArray[6] ? "Cross" : "Circle").concat(" wins"),
+        alertDisplay: true
+      });
+    }
+    if (
+      itemArray[0] !== "empty" &&
+      (itemArray[0] == itemArray[3] && itemArray[3] === itemArray[6])
+    ) {
+      this.setState({
+        winMessage: (itemArray[0] ? "Cross" : "Circle").concat(" wins"),
+        alertDisplay: true
+      });
+    }
+    if (
+      itemArray[0] !== "empty" &&
+      (itemArray[0] == itemArray[4] && itemArray[4] === itemArray[7])
+    ) {
+      this.setState({
+        winMessage: (itemArray[0] ? "Cross" : "Circle").concat(" wins"),
+        alertDisplay: true
+      });
+    }
+    if (
+      itemArray[1] !== "empty" &&
+      (itemArray[1] == itemArray[4] && itemArray[4] === itemArray[7])
+    ) {
+      this.setState({
+        winMessage: (itemArray[1] ? "Cross" : "Circle").concat(" wins"),
+        alertDisplay: true
+      });
+    }
+    if (
+      itemArray[2] !== "empty" &&
+      (itemArray[2] == itemArray[5] && itemArray[5] === itemArray[8])
+    ) {
+      this.setState({
+        winMessage: (itemArray[2] ? "Cross" : "Circle").concat(" wins"),
+        alertDisplay: true
+      });
+    }
+    if (
+      itemArray[2] !== "empty" &&
+      (itemArray[2] == itemArray[4] && itemArray[4] === itemArray[6])
+    ) {
+      this.setState({
+        winMessage: (itemArray[2] ? "Cross" : "Circle").concat(" wins"),
+        alertDisplay: true
+      });
+    }
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.grid}>
+          <View style={styles.row}>
+            <View style={styles.item}>
+              <TouchableOpacity
+                onPress={() =>
+                  !this.state.alertDisplay ? this.drawItem(0) : null
+                }>
+                <Entypo
+                  name={this.chooseItemIcon(0)}
+                  size={50}
+                  color={this.chooseItemColor(0)}
+                />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.item}>
+              <TouchableOpacity
+                onPress={() =>
+                  !this.state.alertDisplay ? this.drawItem(1) : null
+                }>
+                <Entypo
+                  name={this.chooseItemIcon(1)}
+                  size={50}
+                  color={this.chooseItemColor(1)}
+                />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.item}>
+              <TouchableOpacity
+                onPress={() =>
+                  !this.state.alertDisplay ? this.drawItem(2) : null
+                }>
+                <Entypo
+                  name={this.chooseItemIcon(2)}
+                  size={50}
+                  color={this.chooseItemColor(2)}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <View style={styles.item}>
+              <TouchableOpacity
+                onPress={() =>
+                  !this.state.alertDisplay ? this.drawItem(3) : null
+                }>
+                <Entypo
+                  name={this.chooseItemIcon(3)}
+                  size={50}
+                  color={this.chooseItemColor(3)}
+                />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.item}>
+              <TouchableOpacity
+                onPress={() =>
+                  !this.state.alertDisplay ? this.drawItem(4) : null
+                }>
+                <Entypo
+                  name={this.chooseItemIcon(4)}
+                  size={50}
+                  color={this.chooseItemColor(4)}
+                />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.item}>
+              <TouchableOpacity
+                onPress={() =>
+                  !this.state.alertDisplay ? this.drawItem(5) : null
+                }>
+                <Entypo
+                  name={this.chooseItemIcon(5)}
+                  size={50}
+                  color={this.chooseItemColor(5)}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <View style={styles.item}>
+              <TouchableOpacity
+                onPress={() =>
+                  !this.state.alertDisplay ? this.drawItem(6) : null
+                }>
+                <Entypo
+                  name={this.chooseItemIcon(6)}
+                  size={50}
+                  color={this.chooseItemColor(6)}
+                />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.item}>
+              <TouchableOpacity
+                onPress={() =>
+                  !this.state.alertDisplay ? this.drawItem(7) : null
+                }>
+                <Entypo
+                  name={this.chooseItemIcon(7)}
+                  size={50}
+                  color={this.chooseItemColor(7)}
+                />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.item}>
+              <TouchableOpacity
+                onPress={() =>
+                  !this.state.alertDisplay ? this.drawItem(8) : null
+                }>
+                <Entypo
+                  name={this.chooseItemIcon(8)}
+                  size={50}
+                  color={this.chooseItemColor(8)}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+
+        <Text style={styles.winMessage}>{this.state.winMessage}</Text>
+        <Button
+          full
+          rounded
+          primary
+          style={styles.button}
+          onPress={this.resetGame}>
+          <Text style={styles.btntext}>Reset Game</Text>
+        </Button>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  row: {
+    flexDirection: "row"
+  },
+  item: {
+    borderWidth: 2,
+    borderColor: "black",
+    padding: 30
+  },
+  winMessage: {
+    padding: 20,
+    fontSize: 25,
+    fontWeight: "bold"
+  },
+  button: {
+    margin: 20,
+    padding: 10
+  },
+  btntext: {
+    color: "white",
+    fontWeight: "bold"
+  }
+});
